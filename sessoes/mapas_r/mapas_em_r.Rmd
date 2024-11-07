@@ -24,7 +24,8 @@ packages <- c("tidyverse",
               "tools", # for loading shapefiles
               "here", # for easy paths
               "rnaturalearth",
-              "viridis" # color-blind friendly pallets
+              "viridis", # color-blind friendly pallets
+              "ggspatial"
               )
 
 ipak(packages)

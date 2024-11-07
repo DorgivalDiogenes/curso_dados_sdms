@@ -1,0 +1,52 @@
+---
+title: "Exercicio"
+author: "Dorgival"
+date: "2024-11-05"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(here)
+
+source(paste0(here(),"/sessoes/funcoes_de_apoio/instalar_pacotes.R"))
+
+packages <- c("tidyverse", 
+              "sf", # for loading shapefiles
+              "sp",
+              "tools", # for loading shapefiles
+              "here", # for easy paths
+              "rnaturalearth",
+              "viridis", # color-blind friendly pallets
+              "ggspatial"
+              )
+
+ipak(packages)
+
+# Needs to convert to D2
+# Fix new updates of sf package
+sf::sf_use_s2(use_s2 = FALSE)
+
+# Baixar dados de países
+south_america <- ne_countries(scale = 50, continent = "South America", returnclass = "sf")
+
+# Filtrar o Brasil e as áreas fora dele
+brasil <- south_america %>% filter(admin == "Brazil")
+resto_americasul <- south_america %>% filter(admin != "Brazil")
+
+# Criar o mapa da América do Sul com destaque no Brasil
+ggplot() +
+  geom_sf(data = resto_americasul, fill = "lightgray", color = "black") +
+  geom_sf(data = brasil, fill = "darkgreen", color = "black") +
+  theme_minimal() +
+  labs(title = "América do Sul com Brasil destacado")
+
+```
+
+```{r, eval = T, message=F,warning=F}
+
+setwd("C:/Users/dorgi/Desktop/curso_dados_sdms/data/lab")
+library(readr)
+dados_captura <- read_csv("dados_mapa_lab_mapa.csv")
+
+
+```
