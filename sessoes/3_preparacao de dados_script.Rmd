@@ -255,7 +255,7 @@ mapview::mapview(occ_data_filter_edit)
 ### Export
 
 ```{r}
-----
+
   # vetor
   occ_data_filter_edit %>%
   sf::st_write("03_dados/01_ocorrencias/occ_data_filter_edit.shp")
@@ -271,7 +271,7 @@ occ_data_filter_edit %>%
 ```{r}
 # download variables
 env <- worldclim_global("bio", res = 10,
-                        path = "data")
+                        path = "03_dados/02_variaveis")
 
 # rename
 names(env)
@@ -356,10 +356,9 @@ plot(env_li_vif_scale, col = viridis::viridis(100))
 ### Export
 
 ```{r}
-raster::writeRaster(x = env_li_vif_scale,
-                    filename = paste0("03_dados/02_variaveis/", names(env_li_vif_scale)),
-                    bylayer = TRUE,
-                    format = "GTiff",
+terra::writeRaster(x = env_li_vif_scale,
+                    filename = paste0("03_dados/02_variaveis/", names(env_li_vif_scale),
+                     ".tif"),
                     overwrite = TRUE)
 
 ```
